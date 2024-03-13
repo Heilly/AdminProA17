@@ -6,21 +6,14 @@ import { ProgressComponent } from './pages/progress/progress.component';
 import { Grafica1Component } from './pages/grafica1/grafica1.component';
 import { NoPageFoundComponent } from './pages/404/404.component';
 import { PagesComponent } from './pages/pages.component';
+import { AUTH_ROUTES } from './auth/auth.routes';
 
 export const routes: Routes = [
     { 
-        path: 'dashboard', 
-        component: PagesComponent,
-        children: [
-            { path: '', component: DashboardComponent },
-            { path: 'progress', component: ProgressComponent },
-            { path: 'grafica1', component: Grafica1Component },
-        ]
+        path:'',
+        loadChildren: () => import('./pages/pages.routes').then( r => r.PAGES_ROUTES )
     },
+    ...AUTH_ROUTES,
     
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-
-    {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-    {path: '**', component: NoPageFoundComponent},
+    { path: '**', component: NoPageFoundComponent},
 ];
