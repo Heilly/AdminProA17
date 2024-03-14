@@ -1,1 +1,50 @@
-<p>progress works!</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-body">
+                    <h4 class="card-title">Progres 1 </h4>
+                    <div class="progress m-t-30">
+                        <div class="progress-bar bg-primary active progress-bar-striped" 
+                        style="width: 30%; height:12px;" role="progressbar"
+                        [style.width]="getProgreso1"> 
+                    </div>
+                    </div>
+                    <h4 class="card-title m-t-30">Progres 2</h4>
+                    <div class="progress m-t-30">
+                        <div class="progress-bar bg-success active progress-bar-striped" 
+                        style="width: 30%; height:12px;" role="progressbar"
+                        [style.width]="getProgreso2"> 
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <shared-increment 
+                [progresss]="progres1" 
+                [btnClass]="'bg-primary'"
+                (valueEmit)="getValueEmmited($event)" 
+                />
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <shared-increment 
+                [progresss]="progres2"
+                btnClass="btn bg-success"
+                (valueEmit)=" progres2 = $event "
+                />
+            </div>
+        </div>
+    </div>
+</div>
