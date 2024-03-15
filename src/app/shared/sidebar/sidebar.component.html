@@ -1,38 +1,35 @@
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="user-profile">
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="./assets/images/users/profile.png" alt="user" /><span class="hide-menu">Steave Jobs </span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="javascript:void()">My Profile </a></li>
-                                <li><a href="javascript:void()">My Balance</a></li>
-                                <li><a href="javascript:void()">Inbox</a></li>
-                                <li><a href="javascript:void()">Account Setting</a></li>
-                                <li><a href="javascript:void()">Logout</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-devider"></li>
-                        <li class="nav-small-cap">PERSONAL</li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="index.html">Minimal </a></li>
-                                <li><a href="index2.html">Analytical</a></li>
-                                <li><a href="index3.html">Demographical</a></li>
-                                <li><a href="index4.html">Modern</a></li>
-                            </ul>
-                        </li>
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar ps ps--theme_default ps--active-y" data-ps-id="4734427c-43a8-9f45-c5e4-f40bde6612fa">
+        <!-- Sidebar navigation-->
+
+        <nav class="sidebar-nav active">
+            <ul id="sidebarnav" class="in">
+                <li class="user-profile">
+                    <a class="has-arrow waves-effect waves-dark" href="#user-profile" aria-expanded="false" data-toggle="collapse" aria-controls="user-profile" >
+                        <img src="../assets/images/users/profile.png" alt="user"><span class="hide-menu">Steave Jobs </span></a>
+                    <ul aria-expanded="false" class="collapse" id="user-profile">
+                        <li><a href="javascript:void()">My Profile </a></li>
+                        <li><a href="javascript:void()">My Balance</a></li>
+                        <li><a href="javascript:void()">Inbox</a></li>
+                        <li><a href="javascript:void()">Account Setting</a></li>
+                        <li><a href="javascript:void()">Logout</a></li>
                     </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
+                </li>
+                <li class="nav-devider"></li>
+                <li class="nav-small-cap">PERSONAL</li>
+                <li class=""> <a class="has-arrow waves-effect waves-dark" href="#dashboard" aria-expanded="false" data-toggle="collapse">
+                    <i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span class="label label-rouded label-themecolor pull-right"> {{subMenuDashboard.length}} </span></span></a>
+                    <ul aria-expanded="false" class="collapse" style="height: 0px;" id="dashboard">
+                        @for (item of subMenuDashboard; track $index) {
+                            <li><a [routerLink]="item.url" routerLinkActive="active" [routerLinkActiveOptions]="{'exact': true}">{{item.title}} </a></li>
+
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__scrollbar-y-rail" style="top: 0px; height: 467px; right: 0px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 224px;"></div></div></div>
+    <!-- End Sidebar scroll-->
+</aside>
