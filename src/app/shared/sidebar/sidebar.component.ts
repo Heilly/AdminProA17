@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { UsuarioservService } from '../../serivices/usuarioserv/usuarioserv.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,10 +11,20 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class SidebarComponent {
 
+  private usuarioServ = inject( UsuarioservService );
+  private router = inject( Router );
+
+  logout(){
+    this.usuarioServ.logout();
+  }
+
+
   subMenuDashboard = [
     { url: '/dashboard/progress', title: 'Progress' },
     { url: '/dashboard/promise', title: 'Promise' },
     { url: '/dashboard/rxjs', title: 'RxJs' },
+
+    
   ]
 
 

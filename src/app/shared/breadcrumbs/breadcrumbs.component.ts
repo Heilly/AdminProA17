@@ -22,10 +22,10 @@ export class BreadcrumbsComponent implements OnDestroy {
   public titleSub$ : Subscription;
 
   constructor() {
-    console.log(this.route);
+    //console.log(this.route);
 
     this.titleSub$ = this.getArguments().subscribe(  value => { 
-                          console.log(value?.title?.toString());
+                          //console.log(value?.title?.toString());
                           if( value === null || value === undefined ) return this.title = 'No Title'; 
                           if ( value.title === undefined ) return this.title = 'No Title'; 
                           
