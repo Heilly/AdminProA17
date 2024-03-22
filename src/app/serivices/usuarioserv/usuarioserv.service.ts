@@ -1,10 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { effect, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment.dev';
-import { UserRegister } from '../../interfaces/userRegister.interface';
 import { UserLogin } from '../../interfaces/userLogin.interface';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserRenewGoogle} from '../../interfaces/UserRenewGoogle.interface';
+import { UsuarioDB } from '../../interfaces/UsuarioDB.inetrface';
+import { UserCreated } from '../../interfaces/userCreated.interface';
+import { UserLoginGoogle } from '../../interfaces/userLoginGoogle.interface';
+import { FormGroup } from '@angular/forms';
 
 declare const google: any;
 
@@ -15,6 +19,18 @@ export class UsuarioservService {
   private router = inject( Router );
   private baseUrl = environment.baseUrl;
 
+  public usuario = signal<UsuarioDB | undefined>( undefined );
+
+  get token(){
+    return localStorage.getItem('tokenUser') || '';
+  }
+
+  constructor(){
+    effect(() => {
+      this.usuario()
+    })
+  }
+
   /**
    * Encabezados (headers): Autenticación: para enviar tokens de autenticación (como JWT) para identificar y autorizar a los usuarios.
    * Cuerpo (body): Datos de entrada: al crear o actualizar un recurso, generalmente los incluirás en el cuerpo de la solicitud.
@@ -22,20 +38,23 @@ export class UsuarioservService {
       Envío de archivos y formularios
    */
   validarToken() : Observable<boolean>{
-    const token = localStorage.getItem('tokenUser') || '';
-    return this.http.get( `${this.baseUrl}/login/renew`, {
+    return this.http.get<UserRenewGoogle>( `${this.baseUrl}/login/renew`, {
       headers: {
-        'x-token': token
+        'x-token': this.token
       }
     } ).pipe(
-      tap( (resp: any) => localStorage.setItem('tokenUser', resp.token)  ),
+      tap( (resp) =>{
+        //console.log(resp);
+        this.usuario.set( resp.usuarioDB);
+        //console.log(this.usuario());
+        localStorage.setItem('tokenUser', resp.token)  }),
       map( (resp) => true),
       catchError( () => of(false))
     );
 
   }
 
-  crearUsuario( registerForm : UserRegister){
+  crearUsuario( registerForm : UsuarioDB){
 
     const body = {
       name: registerForm.name,
@@ -45,10 +64,27 @@ export class UsuarioservService {
     //puedo enviar los valores del formulario y que el backend seleccione los valores que necesitan
     //this.registerForm.value  return this.http.post( `${ this.baseUrl }/usuarios`, registerForm )
     //o puedo enviar los datos creando una variable body, esto es util para cuando tenemos campos con nombres diferentes 
-    return this.http.post( `${ this.baseUrl }/usuarios`, body )
+    return this.http.post<UserCreated>( `${ this.baseUrl }/usuarios`, body )
                 .pipe(
-                  tap( (resp: any) => localStorage.setItem('tokenUser', resp.token) )
+                  tap( (resp) => localStorage.setItem('tokenUser', resp.token) )
                 );
+  }
+  actualizarUsuario( data : UsuarioDB) : Observable<UsuarioDB>{
+
+    const body = {
+      name: data.name,
+      email: data.email
+    }
+
+    return this.http.put<UserCreated>( `${this.baseUrl}/usuarios/${this.usuario()?.uid}`, body, {
+      headers: {
+        'x-token' : this.token
+      } } ).pipe(
+        map( data => data.usuario ),
+        tap( data => {
+          this.usuario.set(data);
+        }) )
+      
   }
 
   loginUsuario( formLogin: UserLogin){
@@ -57,14 +93,14 @@ export class UsuarioservService {
       email: formLogin.email
     }
     
-    return this.http.post( `${ this.baseUrl }/login`, body )
+    return this.http.post<UserCreated>( `${ this.baseUrl }/login`, body )
               .pipe(
-                tap( (resp: any) => localStorage.setItem('tokenUser', resp.token) )
+                tap( (resp) => localStorage.setItem('tokenUser', resp.token) )
               );
   }
 
   loginGoogle( token: string ){
-    return this.http.post(`${this.baseUrl}/login/google`, {token})
+    return this.http.post<UserLoginGoogle>(`${this.baseUrl}/login/google`, {token})
                 .pipe(
                   tap( (resp : any) => {
                     //console.log(resp);
@@ -73,8 +109,6 @@ export class UsuarioservService {
                   } )
                 )
   }
-
-  
 
   logout(){
 
@@ -86,6 +120,7 @@ export class UsuarioservService {
     google.accounts.id.revoke(userEmail, () => {
       this.router.navigateByUrl('/login');
     })
-
   }
+
+
 }

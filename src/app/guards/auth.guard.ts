@@ -9,7 +9,7 @@ import { tap } from 'rxjs';
  */
 
 export const authCanActivatedGuard: CanActivateFn = (route, state) => {
-  console.log('authCanActivatedGuard');
+  //console.log('authCanActivatedGuard');
   const usuarioServ = inject( UsuarioservService );
   const router = inject( Router );
 

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, ViewChild, viewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, ViewChild, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ErrorsService } from '../../serivices/errorsServ/errors.service';
@@ -23,6 +23,7 @@ export class LoginComponent implements AfterViewInit {
   private errorsServ = inject( ErrorsService );
   private usuarioServ = inject( UsuarioservService );
   private router = inject( Router );
+  private ngZone = inject( NgZone );
 
   public formLogin : FormGroup;
 
@@ -31,10 +32,19 @@ export class LoginComponent implements AfterViewInit {
   constructor(){
       this.formLogin = this.fb.group({
       email: [ localStorage.getItem('email') || '' , [ Validators.required, Validators.email ] ],
-      password: ['', Validators.required ],
+      password: ['123456', Validators.required ],
       remember: [false]
     });
   }
+
+  /**
+   * Cuando el usuario da click en el btnGoogle,
+   * googleInit() se envia la informacion de mi id al serve de google, junto con la solicitud del usuario de hacer el login
+   *  Google envia como respuesta las credenciales en forma de token
+   * Este token lo enviamos al backend this.usuarioServ.loginGoogle( response.credential )
+   * El backend recibe el token const googleSignIn = async( req, res = response ) donde la request es el token
+   * googleVerify( req.body.token ) verifica que el token sea correcto y devolviendo el payload, en este punto podemos obtener los datos del user logueado 
+   */
   
   ngAfterViewInit(): void {
     this.googleInit()
@@ -52,12 +62,13 @@ export class LoginComponent implements AfterViewInit {
     google.accounts.id.prompt(); // also display the One Tap dialog
   }
   handleCredentialResponse(response: any) {
+    console.log(response);
     console.log("Encoded JWT ID token: " + response.credential);
     
     this.usuarioServ.loginGoogle( response.credential )
         .subscribe( () => {
-          
-          this.router.navigateByUrl('/dashboard')})
+          this.ngZone.run(() => this.router.navigateByUrl('/dashboard' )
+          )})
   }
 
   onSubmit(){
