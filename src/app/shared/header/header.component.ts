@@ -1,7 +1,8 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UsuarioservService } from '../../serivices/usuarioserv/usuarioserv.service';
-import { ImgservService } from '../../serivices/imgserv/imgserv.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { UsuarioDB } from '../../interfaces/UsuarioDB.inetrface';
+import { UsuarioModel } from '../../models/usuario.model';
 
 @Component({
   selector: 'app-header',
@@ -13,15 +14,17 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class HeaderComponent {
   
   private usuarioServ = inject( UsuarioservService );
-  private imgServ = inject( ImgservService );
 
   public imgUrl = '';
-  public usuario = computed( () => this.usuarioServ.usuario() );
+  public usuario : UsuarioModel;
 
 
   constructor(){
-    this.imgUrl = this.imgServ.imgUserUrl();
-    //console.log(this.imgUrl);
+
+    this.usuario = this.usuarioServ.usuario;
+
+    if(this.usuario.img)
+      this.imgUrl = this.usuario.img;
   }
 
 

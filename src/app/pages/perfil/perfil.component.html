@@ -50,17 +50,17 @@
             <h4 class="card-title">Avatar</h4>
             <h6 class="card-subtitle">Imagen del usuario</h6>
 
-            <img [src]="imgUsuario" class="img-thumbnail" width="150px" >
+            <img [src]="usuario.imagenUrl" class="img-thumbnail" width="150px" >
             <br><br>
             <input 
-              (change)="cambiarImagen($event.target)"
+            (change)="cambiarImagen($event.target)"
               type="file" >
             <br><br>
             <div class="form-group row m-b-0">
               <div class="offset-sm-3 col-sm-12">
                   <button
                     [disabled]="!imagenSubir"
-                    (click)="guardarImage()"
+                    (click)="subirImagen()"
                     type="button" class="btn btn-block btn-success waves-effect waves-light">
                       <i class="fa fa-save mx-2"></i>Cambiar imagen</button>
               </div>

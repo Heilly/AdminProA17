@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { effect, inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable} from '@angular/core';
 import { environment } from '../../environments/environment.dev';
 import { UserLogin } from '../../interfaces/userLogin.interface';
 import { catchError, map, Observable, of, tap } from 'rxjs';
@@ -8,7 +8,7 @@ import { UserRenewGoogle} from '../../interfaces/UserRenewGoogle.interface';
 import { UsuarioDB } from '../../interfaces/UsuarioDB.inetrface';
 import { UserCreated } from '../../interfaces/userCreated.interface';
 import { UserLoginGoogle } from '../../interfaces/userLoginGoogle.interface';
-import { FormGroup } from '@angular/forms';
+import { UsuarioModel } from '../../models/usuario.model';
 
 declare const google: any;
 
@@ -19,17 +19,23 @@ export class UsuarioservService {
   private router = inject( Router );
   private baseUrl = environment.baseUrl;
 
-  public usuario = signal<UsuarioDB | undefined>( undefined );
+  //public usuario = signal<UsuarioDB | undefined>( undefined );
+  public usuario : UsuarioModel;
+
 
   get token(){
     return localStorage.getItem('tokenUser') || '';
   }
-
-  constructor(){
-    effect(() => {
-      this.usuario()
-    })
+  get uid():string {
+    return this.usuario.uid || '';
   }
+
+  
+  constructor(){
+    this.usuario = new UsuarioModel('', '');
+  }
+
+  
 
   /**
    * Encabezados (headers): Autenticación: para enviar tokens de autenticación (como JWT) para identificar y autorizar a los usuarios.
@@ -44,11 +50,11 @@ export class UsuarioservService {
       }
     } ).pipe(
       tap( (resp) =>{
-        //console.log(resp);
-        this.usuario.set( resp.usuarioDB);
-        //console.log(this.usuario());
-        localStorage.setItem('tokenUser', resp.token)  }),
-      map( (resp) => true),
+        const {name, email, role, google, uid, img=''} = resp.usuarioDB;
+        this.usuario = new UsuarioModel(name, email, role, google, uid, img);
+        localStorage.setItem('tokenUser', resp.token);
+      return true  }),
+      map( () => true),
       catchError( () => of(false))
     );
 
@@ -69,21 +75,17 @@ export class UsuarioservService {
                   tap( (resp) => localStorage.setItem('tokenUser', resp.token) )
                 );
   }
-  actualizarUsuario( data : UsuarioDB) : Observable<UsuarioDB>{
+  actualizarPerfil( data : UsuarioModel){
 
     const body = {
       name: data.name,
       email: data.email
     }
 
-    return this.http.put<UserCreated>( `${this.baseUrl}/usuarios/${this.usuario()?.uid}`, body, {
+    return this.http.put( `${this.baseUrl}/usuarios/${this.usuario.uid}`, body, {
       headers: {
         'x-token' : this.token
-      } } ).pipe(
-        map( data => data.usuario ),
-        tap( data => {
-          this.usuario.set(data);
-        }) )
+      } } )
       
   }
 

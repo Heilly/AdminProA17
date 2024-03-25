@@ -1,50 +1,55 @@
-import { computed, inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.dev';
-import { Tipo } from '../../interfaces/tipo.type';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import {  ImgUploadI } from '../../interfaces/file.interface';
-import { map, tap } from 'rxjs';
-import { UsuarioDB } from '../../interfaces/UsuarioDB.inetrface';
-import { UsuarioservService } from '../usuarioserv/usuarioserv.service';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({providedIn:'root'})
 export class FileuploadService {
 
-  private usuarioServ = inject( UsuarioservService );
   
   private baseUrl = environment.baseUrl;
   private http = inject( HttpClient );
 
   
-
-  /*async actualizarFoto(
+  async actualizarFoto(
     archivo: File,
-    tipo: 'hospitales' | 'medicos' | 'usuarios',
+    tipo: 'usuarios'|'medicos'|'hospitales',
     id: string
-  ){
+  ) {
 
-      try {
-        const url = `${this.baseUrl}/upload/${tipo}/${id}`;
-        const formData = new FormData();
-        formData.append('imagen', archivo);
+    try {
 
-        const resp = await fetch( url, {
-          method: 'PUT',
-          headers: {
-            'x-token': localStorage.getItem('tokenUser') || ''
-          },
-          body: formData
-        });
-        console.log(resp);
-        return;
+      const url = `${ this.baseUrl }/upload/${ tipo }/${ id }`;
+      const formData = new FormData();
+      formData.append('imagen', archivo);
 
-      } catch (error) {
-        console.log(error);
+      const resp = await fetch( url, {
+        method: 'PUT',
+        headers: {
+          'x-token': localStorage.getItem('tokenUser') || ''
+        },
+        body: formData
+      });
+
+      const data = await resp.json();
+
+      if ( data.ok ) {
+        console.log('ok', data.nombreArchivo);
+        return data.nombreArchivo;
+      } else {
+        console.log(data.msg);
         return false;
       }
-  }*/
+      
+    } catch (error) {
+      console.log('error', error);
+      return false;    
+    }
 
-  actualizarFotos(
+  }
+
+
+
+  /*actualizarFotos(
     archivo: File,
     tipo: Tipo,
     id: string
@@ -56,24 +61,7 @@ export class FileuploadService {
     const formData = new FormData();
     formData.append('imagen', archivo);
 
-    return this.http.put<ImgUploadI>(`${this.baseUrl}/upload/${tipo}/${id}`, formData, { headers })
-              .pipe(
-                map(data => data.nombreArchivo),
-                tap( data =>{
-
-                  
-                  this.usuarioServ.usuario.update( currentUser => {
-                    if(currentUser){
-                      currentUser.img = data;
-                      return currentUser;
-                    } else {
-                      return undefined;
-                    }
-                  } );
-                  console.log(this.usuarioServ.usuario);
-                }
-                )
-    );
+    return this.http.put(`${this.baseUrl}/upload/${tipo}/${id}`, formData, { headers })
             
-  }
+  }*/
 }

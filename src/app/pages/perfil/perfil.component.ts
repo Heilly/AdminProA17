@@ -1,9 +1,12 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsuarioservService } from '../../serivices/usuarioserv/usuarioserv.service';
-import { ImgservService } from '../../serivices/imgserv/imgserv.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FileuploadService } from '../../serivices/fileupload/fileupload.service';
+import Swal from 'sweetalert2';
+import { UsuarioModel } from '../../models/usuario.model';
+import { catchError, tap } from 'rxjs';
+
 
 @Component({
   selector: 'app-perfil',
@@ -11,24 +14,28 @@ import { FileuploadService } from '../../serivices/fileupload/fileupload.service
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
 })
-export class PerfilComponent {
+export class PerfilComponent implements OnInit {
 
   private usuarioServ = inject( UsuarioservService );
-  private imgServ = inject( ImgservService );
   private fileServ = inject( FileuploadService );
   private fb = inject( FormBuilder );
 
-  public usuario = this.usuarioServ.usuario();
-  public imgUsuario = this.imgServ.imgUserUrl();
+  public usuario: UsuarioModel;
   public imagenSubir?: File;
   
-  public formProfile : FormGroup;
+  public formProfile! : FormGroup;
 
   constructor (){
+    this.usuario = this.usuarioServ.usuario;
+
+  }
+  ngOnInit(): void {
+
     this.formProfile = this.fb.group({
-      name: [ this.usuario?.name || '', Validators.required],
-      email: [ this.usuario?.email || '', [Validators.required, Validators.email] ]
+      name: [ this.usuario.name , Validators.required ],
+      email: [ this.usuario.email, [ Validators.required, Validators.email ] ],
     });
+
   }
 
 
@@ -36,8 +43,16 @@ export class PerfilComponent {
   onSubmit(){
     //console.log(this.formProfile.value);
 
-    this.usuarioServ.actualizarUsuario(this.formProfile.value)
-        .subscribe();
+    this.usuarioServ.actualizarPerfil(this.formProfile.value)
+    .subscribe( () => {
+      const { name, email } = this.formProfile.value;
+      this.usuario.name = name;
+      this.usuario.email = email;
+
+      Swal.fire('Guardado', 'Cambios fueron guardados', 'success');
+    }, (err) => {
+      Swal.fire('Error', err.error.msg, 'error');
+    });
   }
 
   cambiarImagen(target: any){
@@ -51,16 +66,22 @@ export class PerfilComponent {
     }
   }
 
-  guardarImage(){
-    if(this.imagenSubir && this.usuario?.uid ){
-      this.fileServ.actualizarFotos( this.imagenSubir, 'usuarios', this.usuario?.uid )
-          .subscribe( data => {
-            console.log( '2', data);
-            console.log(  '3', this.usuario)} )
-    }
+  subirImagen(){
+    if(this.usuario.uid ){
+    this.fileServ
+      .actualizarFoto( this.imagenSubir!, 'usuarios', this.usuario.uid )
+      .then( img => {
+        this.usuario.img = img;
+        Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success');
+      }).catch( err => {
+        console.log(err);
+        Swal.fire('Error', 'No se pudo subir la imagen', 'error');
+      })
+
+    }}
     
-  }
-
-
-
 }
+
+
+
+
