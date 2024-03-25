@@ -104,8 +104,9 @@ export class UsuarioservService {
   loginGoogle( token: string ){
     return this.http.post<UserLoginGoogle>(`${this.baseUrl}/login/google`, {token})
                 .pipe(
-                  tap( (resp : any) => {
-                    //console.log(resp);
+                  tap( (resp) => {
+                    console.log('loginGoogle',resp);
+                    this.usuario = new UsuarioModel( resp.name, resp.email, 'USER_ROLE', true, '', resp.picture )
                     localStorage.setItem('tokenUser', resp.token);
                     localStorage.setItem('email', resp.email);
                   } )

@@ -17,12 +17,12 @@ export class UsuarioModel{
     get imagenUrl() {
         
         if ( this.img?.includes('https') ) {
+            //console.log(this.img);
             return this.img;
         }
         
         if ( this.img ) {
             const urlImagen = `${ base_url }/upload/usuarios/${ this.img }`;
-            //console.log(urlImagen);
             return `${ base_url }/upload/usuarios/${ this.img }`;
         } else {
             return `${ base_url }/upload/usuario/no-image`;

@@ -15,16 +15,16 @@ export class HeaderComponent {
   
   private usuarioServ = inject( UsuarioservService );
 
-  public imgUrl = '';
+  
   public usuario : UsuarioModel;
 
 
   constructor(){
 
     this.usuario = this.usuarioServ.usuario;
+    console.log('img',this.usuario.img);
+    console.log( 'imagenUrl',this.usuario.imagenUrl);
 
-    if(this.usuario.img)
-      this.imgUrl = this.usuario.img;
   }
 
 
