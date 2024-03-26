@@ -18,15 +18,21 @@
                 </li>
                 <li class="nav-devider"></li>
                 <li class="nav-small-cap">PERSONAL</li>
-                <li class=""> <a class="has-arrow waves-effect waves-dark" href="#dashboard" aria-expanded="false" data-toggle="collapse">
-                    <i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span class="label label-rouded label-themecolor pull-right"> {{subMenuDashboard.length}} </span></span></a>
-                    <ul aria-expanded="false" class="collapse" style="height: 0px;" id="dashboard">
-                        @for (item of subMenuDashboard; track $index) {
-                            <li><a [routerLink]="item.url" routerLinkActive="active" [routerLinkActiveOptions]="{'exact': true}">{{item.title}} </a></li>
+                
+                @for (item of subMenuDashboard(); track $index) {
+                <li class=""> <a class="has-arrow waves-effect waves-dark" [href]="'#'+item.titulo" aria-expanded="false" data-toggle="collapse">
+                    
+                    <i [class]="item.icono"></i><span class="hide-menu">{{item.titulo}} <span class="label label-rouded label-themecolor pull-right"> {{item.submenu.length}} </span></span></a>
+                    <ul aria-expanded="false" class="collapse" style="height: 0px;" [id]="item.titulo">
+                        
+                            @for (submenu of item.submenu; track $index) {
+                                <li><a [routerLink]="submenu.url" routerLinkActive="active" [routerLinkActiveOptions]="{'exact': true}">{{submenu.titulo}} </a></li>
 
-                        }
+                            }
                     </ul>
+                
                 </li>
+            }
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

@@ -3,6 +3,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { UsuarioservService } from '../../serivices/usuarioserv/usuarioserv.service';
 import { UsuarioDB } from '../../interfaces/UsuarioDB.inetrface';
 import { UsuarioModel } from '../../models/usuario.model';
+import { SidebarservService } from '../../serivices/sidebarserv/sidebarserv.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,10 +15,11 @@ import { UsuarioModel } from '../../models/usuario.model';
 export class SidebarComponent {
 
   private usuarioServ = inject( UsuarioservService );
+  private sidebarServ = inject( SidebarservService )
   private router = inject( Router );
 
   public usuario : UsuarioModel;
-
+  subMenuDashboard = computed( () => this.sidebarServ.menu() );
   constructor(){
 
     this.usuario = this.usuarioServ.usuario;
@@ -28,13 +30,7 @@ export class SidebarComponent {
   }
 
 
-  subMenuDashboard = [
-    { url: '/dashboard/progress', title: 'Progress' },
-    { url: '/dashboard/promise', title: 'Promise' },
-    { url: '/dashboard/rxjs', title: 'RxJs' },
 
-    
-  ]
 
 
 }

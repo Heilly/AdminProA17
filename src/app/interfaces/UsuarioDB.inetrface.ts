@@ -5,6 +5,7 @@ export interface UsuarioDB {
     name:   string;
     email:  string;
     uid?:    string;
-    password?: string;
     img?: string;
+    password?: string;
+    
 }

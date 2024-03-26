@@ -50,12 +50,14 @@
         <div class="card-body">
             <h4 class="card-title">Avatar</h4>
             <h6 class="card-subtitle">Imagen del usuario</h6>
-
-            <img [src]="usuario.imagenUrl" class="img-thumbnail" width="150px" >
+            <div class="text-center">
+              <img [src]="usuario.imagenUrl" class="img-thumbnail" width="150px" >
             <br><br>
             <input 
             (change)="cambiarImagen($event.target)"
               type="file" >
+            </div>
+            
             <br><br>
             <div class="form-group row m-b-0">
               <div class="offset-sm-3 col-sm-12">
@@ -70,6 +72,3 @@
     </div>
         
 </div>
-<pre>
-  {{ formProfile.get('name')?.errors | json }}
-</pre>

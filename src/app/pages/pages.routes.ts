@@ -5,6 +5,9 @@ import { PagesComponent } from './pages.component';
 import { PromiseComponent } from './promise/promise.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
+import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 
 // import { PagesComponent } from './pages.component';
 
@@ -18,6 +21,12 @@ export const PAGES_ROUTES: Routes = [
           { path: 'promise', component: PromiseComponent, title: 'Promise' },
           { path: 'rxjs', component: RxjsComponent, title: 'RxJs' },
           { path: 'perfil', component: PerfilComponent, title: 'Perfil de Usuario' },
+
+          //Mantenimientos
+          { path: 'usuarios', component: UsuariosComponent, title: 'Usarios de Aplicacion' },
+          { path: 'hospitales', component: HospitalesComponent, title: 'Hospitales de Aplicacion' },
+          { path: 'medicos', component: MedicosComponent, title: 'Medicos de Aplicacion' },
+
         ]
   }
 ];

@@ -1,0 +1,96 @@
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+            <input type="text"
+            class="form-control"
+            placeholder="Buscar usuario..."
+            (keydown.enter)="buscarUsuario()"
+            #inputBuscar
+            />
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn fast">
+  @if (cargando) {
+      <div class="col-12">
+    <div class="card">
+      <div class="">
+          <div class="loader__figure"></div>
+          <!--<p class="loader__label">Cargando</p>-->
+      </div>
+    </div>
+  </div>
+  } @else {
+      <div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Usuarios</h4>
+            <h6 class="card-subtitle">Usuarios registrados en la aplicacion( {{ totalUsuario }} )</h6>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="w100">Avatar</th>
+                            <th>Correo</th>
+                            <th>Nombre</th>
+                            <th class="w140">Role</th>
+                            <th class="w100">Auth</th>
+                            <th class="w100 text-nowrap">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      @for (usuario of usuariosList; track $index) {
+                        <tr>
+                          
+                            <td class="text-center "> 
+                              <img
+                                (click)="abrirModal(usuario)" 
+                                [src]="usuario.imagenUrl" alt="Avatar Usuario" class="avatar cursor">
+                            </td>
+                            <td> {{ usuario.email }} </td>
+                            <td> {{ usuario.name }} - {{usuario.uid}} </td>
+                            <td> 
+                              <select class="form-control" 
+                                      [(ngModel)]="usuario.role"
+                                      (change)="cambiarRole(usuario)">
+                                <option [value]="'ADMIN_ROLE'" [selected]="usuario.role === 'ADMIN_ROLE'">Admin</option>
+                                <option [value]="'USER_ROLE'" [selected]="usuario.role === 'USER_ROLE'">User</option>
+                              </select>
+                            </td>
+                            <td>
+                              @if( usuario.google ){
+                                <span class="label label-danger">Google</span>
+                              } @else {
+                                <span class="label label-info">Email</span>
+                              }
+                            </td>
+                            <td class="text-nowrap text-center">
+
+                              
+                              @if (usuario.uid !== usuariologged.uid) {
+                                <a 
+                                (click)="eliminarUsuario(usuario)"
+                                  data-toggle="tooltip" data-original-title="Borrar"
+                                  class="cursor" > <i class="fa fa-close text-danger"></i> </a>
+                              }
+                                
+                            </td>
+                           
+                        </tr>}
+                    </tbody>
+                </table>
+            </div>
+            @if ( inputBuscar.value.length === 0 ) {
+            <button (click)="cambiarPagina( -5 )" class="btn btn-secondary mx-3">Anteriores</button>
+            <button (click)="cambiarPagina( 5 )" class="btn btn-secondary">Siguientes</button>}
+        </div>
+    </div>
+  </div>
+  }
+
+
+</div>
+

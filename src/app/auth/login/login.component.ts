@@ -62,8 +62,8 @@ export class LoginComponent implements AfterViewInit {
     google.accounts.id.prompt(); // also display the One Tap dialog
   }
   handleCredentialResponse(response: any) {
-    console.log(response);
-    console.log("Encoded JWT ID token: " + response.credential);
+    //console.log(response);
+    //console.log("Encoded JWT ID token: " + response.credential);
     
     this.usuarioServ.loginGoogle( response.credential )
         .subscribe( () => {
@@ -76,7 +76,7 @@ export class LoginComponent implements AfterViewInit {
     if( this.formLogin.invalid ){
       this.formLogin.markAllAsTouched();
     } else{
-      console.log(this.formLogin.value);
+      //console.log(this.formLogin.value);
       this.usuarioServ.loginUsuario( this.formLogin.value )
         .subscribe(resp => {
           if( this.formLogin.get('remember')?.value ){

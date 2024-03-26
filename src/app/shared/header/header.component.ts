@@ -22,8 +22,8 @@ export class HeaderComponent {
   constructor(){
 
     this.usuario = this.usuarioServ.usuario;
-    console.log('img',this.usuario.img);
-    console.log( 'imagenUrl',this.usuario.imagenUrl);
+    //console.log('img',this.usuario.img);
+    //console.log( 'imagenUrl',this.usuario.imagenUrl);
 
   }
 

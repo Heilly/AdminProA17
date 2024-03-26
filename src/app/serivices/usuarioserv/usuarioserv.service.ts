@@ -4,11 +4,10 @@ import { environment } from '../../environments/environment.dev';
 import { UserLogin } from '../../interfaces/userLogin.interface';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { UserRenewGoogle} from '../../interfaces/UserRenewGoogle.interface';
-import { UsuarioDB } from '../../interfaces/UsuarioDB.inetrface';
-import { UserCreated } from '../../interfaces/userCreated.interface';
-import { UserLoginGoogle } from '../../interfaces/userLoginGoogle.interface';
 import { UsuarioModel } from '../../models/usuario.model';
+import { UserRenewGoogle, UsuarioDB, UserCreated, UserLoginGoogle, GetUsuario } from '../../interfaces';
+import { Tipo } from '../../interfaces/tipo.type';
+;
 
 declare const google: any;
 
@@ -29,6 +28,13 @@ export class UsuarioservService {
   get uid():string {
     return this.usuario.uid || '';
   }
+  get headers(){
+    return{
+      headers: {
+        'x-token' : this.token
+      }
+    }
+  }
 
   
   constructor(){
@@ -44,11 +50,8 @@ export class UsuarioservService {
       Envío de archivos y formularios
    */
   validarToken() : Observable<boolean>{
-    return this.http.get<UserRenewGoogle>( `${this.baseUrl}/login/renew`, {
-      headers: {
-        'x-token': this.token
-      }
-    } ).pipe(
+    return this.http.get<UserRenewGoogle>( `${this.baseUrl}/login/renew`, this.headers )
+    .pipe(
       tap( (resp) =>{
         const {name, email, role, google, uid, img=''} = resp.usuarioDB;
         this.usuario = new UsuarioModel(name, email, role, google, uid, img);
@@ -82,10 +85,7 @@ export class UsuarioservService {
       email: data.email
     }
 
-    return this.http.put( `${this.baseUrl}/usuarios/${this.usuario.uid}`, body, {
-      headers: {
-        'x-token' : this.token
-      } } )
+    return this.http.put( `${this.baseUrl}/usuarios/${this.usuario.uid}`, body, this.headers)
       
   }
 
@@ -125,5 +125,51 @@ export class UsuarioservService {
     })
   }
 
+  cargarUsuarios( desde: number = 0 ) {
+    return this.http.get<GetUsuario>(` ${ this.baseUrl }/usuarios?desde=${ desde } `, this.headers)
+      .pipe(
+        //delay(1000),
+        map( resp => {
+          console.log(resp.usuarios);
+          const usuarios = resp.usuarios.map( 
+            //creo nuevos usuario con la estuctura de UsuarioModel
+            user => new UsuarioModel( user.name, user.email, user.role, user.google, user.uid, user.img, user.password )
+           )
+           
+           return {
+            total: resp.total,
+            usuarios: usuarios
+           }
+        })
+      )
+  }
+
+  buscarUsuario( tipo: Tipo, field: string ) : Observable<UsuarioModel[]> {
+    return this.http.get( `${this.baseUrl}/todo/coleccion/${ tipo }/${ field }`, this.headers )
+    .pipe(
+      //delay(1000),
+      map( (resp: any) => {
+        const user = resp.resultados;
+        const usuarios = user.map( 
+          //creo nuevos usuario con la estuctura de UsuarioModel
+          (user: UsuarioModel) => new UsuarioModel( user.name, user.email, user.role, user.google, user.uid, user.img, user.password )
+         )
+         console.log(usuarios);
+         return usuarios;
+      })
+    )
+  }
+  eliminarUsuario( usuario: UsuarioModel){
+    const idUsuario = usuario.uid
+    return this.http.delete(`${this.baseUrl}/usuarios/${idUsuario}`, this.headers)
+  }
+
+  guardarUsuario(usuario: UsuarioModel){
+
+    return this.http.put( `${this.baseUrl}/usuarios/${usuario.uid}`, usuario, this.headers)
+                .pipe(
+                  tap(data => console.log(data))
+                )
+  }
 
 }
