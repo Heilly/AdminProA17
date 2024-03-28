@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Tipo } from '../../interfaces/tipo.type';
-import { environment } from '../../environments/environment.dev';
+import { Tipo } from '../interfaces/tipo.type';
+import { environment } from '../environments/environment.dev';
 
 @Injectable({ providedIn: 'root'})
 export class ModalimagenservService {

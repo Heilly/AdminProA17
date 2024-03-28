@@ -1,12 +1,12 @@
 import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsuarioservService } from '../../../serivices/usuarioserv/usuarioserv.service';
+import { UsuarioservService } from '../../../serivices/usuarioserv.service';
 import { UsuarioModel } from '../../../models/usuario.model';
 import { delay, pipe, Subscription } from 'rxjs';
 import { Tipo } from '../../../interfaces/tipo.type';
 import Swal from 'sweetalert2';
 import { FormArray, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ModalimagenservService } from '../../../serivices/modalimagenserv/modalimagenserv.service';
+import { ModalimagenservService } from '../../../serivices/modalimagenserv.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -14,7 +14,7 @@ import { ModalimagenservService } from '../../../serivices/modalimagenserv/modal
   standalone: true,
   imports: [CommonModule, FormsModule]
 })
-export class UsuariosComponent implements OnInit, OnInit, OnDestroy {
+export class UsuariosComponent implements OnInit, OnDestroy {
 
   private usuarioServ = inject( UsuarioservService );
   public modalImgServ = inject( ModalimagenservService );

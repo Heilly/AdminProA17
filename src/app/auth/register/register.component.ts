@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder,  FormGroup,  ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ErrorsService } from '../../serivices/errorsServ/errors.service';
-import { UsuarioservService } from '../../serivices/usuarioserv/usuarioserv.service';
+import { ErrorsService } from '../../serivices/errors.service';
+import { UsuarioservService } from '../../serivices/usuarioserv.service';
 
 import Swal from 'sweetalert2';
 

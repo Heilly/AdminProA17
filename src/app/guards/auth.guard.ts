@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, CanMatchFn, Router } from '@angular/router';
-import { UsuarioservService } from '../serivices/usuarioserv/usuarioserv.service';
+import { UsuarioservService } from '../serivices/usuarioserv.service';
 import { tap } from 'rxjs';
 
 /**

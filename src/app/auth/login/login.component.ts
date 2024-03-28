@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, inject, ViewChild, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ErrorsService } from '../../serivices/errorsServ/errors.service';
-import { UsuarioservService } from '../../serivices/usuarioserv/usuarioserv.service';
+import { ErrorsService } from '../../serivices/errors.service';
+import { UsuarioservService } from '../../serivices/usuarioserv.service';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 

@@ -8,6 +8,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
+import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 
 // import { PagesComponent } from './pages.component';
 
@@ -26,6 +27,7 @@ export const PAGES_ROUTES: Routes = [
           { path: 'usuarios', component: UsuariosComponent, title: 'Usarios de Aplicacion' },
           { path: 'hospitales', component: HospitalesComponent, title: 'Hospitales de Aplicacion' },
           { path: 'medicos', component: MedicosComponent, title: 'Medicos de Aplicacion' },
+          { path: 'medico/:id', component: MedicoComponent, title: 'Editar Medico' },
 
         ]
   }

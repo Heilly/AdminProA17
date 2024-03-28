@@ -1,9 +1,8 @@
 import { Component, computed, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { UsuarioservService } from '../../serivices/usuarioserv/usuarioserv.service';
-import { UsuarioDB } from '../../interfaces/UsuarioDB.inetrface';
 import { UsuarioModel } from '../../models/usuario.model';
-import { SidebarservService } from '../../serivices/sidebarserv/sidebarserv.service';
+import { UsuarioservService } from '../../serivices/usuarioserv.service';
+import { SidebarservService } from '../../serivices/sidebarserv.service';
 
 @Component({
   selector: 'app-sidebar',

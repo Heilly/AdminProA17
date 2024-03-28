@@ -12,3 +12,6 @@
         > `public usuario: UsuarioModel;`
         > los modelos en Angular se definen como clases TypeScript que encapsulan los datos y lógica relacionada con esos datos.
         > "Data binding" permite la sincronización automática entre el modelo y la vista. Si el modelo es enlazado a una vista mediante directivas de Angular como {{ }} para interpolación, [ ] para binding de propiedad, o ( ) para binding de eventos, cualquier cambio en las propiedades del modelo se reflejará automáticamente en la vista.
+
+## 2 ``ngModel``
+ proporciona enlace bidireccional de datos. Esto significa que los cambios en el modelo actualizan la vista y los cambios en la vista actualizan el modelo. Es útil cuando trabajas con formularios simples o cuando necesitas una solución rápida para enlazar los datos de entrada con propiedades en tu componente.

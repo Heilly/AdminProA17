@@ -1,8 +1,8 @@
 import { Component, effect, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsuarioservService } from '../../serivices/usuarioserv/usuarioserv.service';
+import { UsuarioservService } from '../../serivices/usuarioserv.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FileuploadService } from '../../serivices/fileupload/fileupload.service';
+import { FileuploadService } from '../../serivices/fileupload.service';
 import Swal from 'sweetalert2';
 import { UsuarioModel } from '../../models/usuario.model';
 import { catchError, tap } from 'rxjs';

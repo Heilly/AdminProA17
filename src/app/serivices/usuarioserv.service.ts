@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable} from '@angular/core';
-import { environment } from '../../environments/environment.dev';
-import { UserLogin } from '../../interfaces/userLogin.interface';
+import { environment } from '../environments/environment.dev';
+import { UserLogin } from '../interfaces/userLogin.interface';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { UsuarioModel } from '../../models/usuario.model';
-import { UserRenewGoogle, UsuarioDB, UserCreated, UserLoginGoogle, GetUsuario } from '../../interfaces';
-import { Tipo } from '../../interfaces/tipo.type';
+import { UsuarioModel } from '../models/usuario.model';
+import { UserRenewGoogle, UsuarioDB, UserCreated, UserLoginGoogle, GetUsuario } from '../interfaces';
+import { Tipo } from '../interfaces/tipo.type';
 ;
 
 declare const google: any;

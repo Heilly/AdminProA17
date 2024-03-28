@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalimagenservService } from '../../../serivices/modalimagenserv/modalimagenserv.service';
+import { ModalimagenservService } from '../../../serivices/modalimagenserv.service';
 import { UsuarioModel } from '../../../models/usuario.model';
-import { FileuploadService } from '../../../serivices/fileupload/fileupload.service';
+import { FileuploadService } from '../../../serivices/fileupload.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -21,7 +21,7 @@ public imgTemp: any = null;
 
 public usuario?: UsuarioModel;
 constructor (){
-  console.log(this.imgTemp);
+  
   }
 
 
@@ -33,7 +33,7 @@ cerrarModal(){
 cambiarImagen( target: any ) {
   
   const file : File = target.files[0];
-  console.log(file);
+  //console.log(file);
   this.imagenSubir = file;
 
   if ( !file ) { 

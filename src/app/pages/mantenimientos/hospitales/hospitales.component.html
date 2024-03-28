@@ -4,7 +4,9 @@
             <div class="card-body">
               <input type="text"
               class="form-control"
-              placeholder="Buscar usuario..."
+              placeholder="Buscar hospital..."
+              #inputBuscar
+              (keydown.enter)="buscarHospital(inputBuscar.value)"
               />
             </div>
         </div>
@@ -12,7 +14,8 @@
   </div>
   
   <div class="row animated fadeIn fast">
-    <div class="col-12">
+    @if (cargando) {
+        <div class="col-12">
       <div class="card">
         <div class="">
             <div class="loader__figure"></div>
@@ -20,42 +23,82 @@
         </div>
       </div>
     </div>
+    } @else {
+
+        
     <div class="col-12">
       <div class="card">
+        
           <div class="card-body">
-              <h4 class="card-title">Usuarios</h4>
-              <h6 class="card-subtitle">Usuarios registrados en la aplicacion</h6>
-              <div class="table-responsive">
-                  <table class="table table-bordered">
-                      <thead>
-                          <tr>
-                              <th>Avatar</th>
-                              <th>Correo</th>
-                              <th>Nombre</th>
-                              <th>Role</th>
-                              <th>Auth</th>
-                              <th class="text-nowrap">Action</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr>
-                              <td>Lunar probe project</td>
-                              <td>Lunar probe project</td>
-                              <td>Lunar probe project</td>
-                              <td>Lunar probe project</td>
-                              <td>Lunar probe project</td>
-                              
-                              <td class="text-nowrap">
-                                  <a href="#" data-toggle="tooltip" data-original-title="Editar"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                  <a href="#" data-toggle="tooltip" data-original-title="Borrar"> <i class="fa fa-close text-danger"></i> </a>
-                              </td>
-                          </tr>
-                      </tbody>
-                  </table>
+        <div class="row">
+            <div class="col-8">
+                <h4 class="card-title">Hospitales - ( {{ hospitalesList.length }} )</h4>
+                <h6 class="card-subtitle">
+                    Hospitales registrados en mi aplicación
+                </h6>
+            </div>
+
+            <div class="col">
+                <div class="text-right">
+                    <button class="btn btn-primary"
+                    (click)="abrirSweetAlert()">
+                        <i class="fa fa-hospital-o"></i> 
+                        Crear hospital
+                    </button>
+                </div>
+            </div>
+        </div>
+            @if (existe) {
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class=" w140">Foto</th>
+                            <th>Nombre</th>
+                            <th class="text-nowrap text-center w140">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @for (hospital of hospitalesList; track $index) {
+                        <tr>
+                            <td>
+                            <img 
+                            (click)="abrirModal(hospital)"
+                                [src]=" hospital.img! | appImagenpipe:'hospitales' " 
+                                alt="" class="avatar cursor">
+                            </td>
+                            <td>
+                            <input
+                                [(ngModel)]="hospital.nombre"
+                                type="text" placeholder="Nombre del Hospital" class="form-control">
+                            </td>
+                            
+                            <td class="text-nowrap text-center">
+                                <a   (click)="guardarCambios(hospital)"
+                                    class="cursor"
+                                    data-toggle="tooltip" data-original-title="Guardar"> 
+                                    <i class="fa fa-save text-inverse m-r-10"></i> 
+                                </a>
+                                <a 
+                                    (click)="eliminarHospital(hospital)"
+                                    class="cursor"
+                                    data-toggle="tooltip" data-original-title="Borrar"> <i class="fa fa-close text-danger"></i> </a>
+                            </td>
+                        </tr>
+                    }
+                        
+                    </tbody>
+                </table>
+            </div>
+        } @else {
+            <div class="alert alert-warning" role="alert">
+                No existe hospital con ese termino de busqueda
               </div>
-          </div>
+        }
+            </div>
       </div>
     </div>
+}
   </div>
   
   

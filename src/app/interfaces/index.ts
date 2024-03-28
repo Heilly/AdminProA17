@@ -7,3 +7,4 @@ export * from './userCreated.interface';
 export * from './usuariosCargar.interface';
 export * from './userLogin.interface';
 export *  from './userLoginGoogle.interface';
+export *  from './tipo.type';

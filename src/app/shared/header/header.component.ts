@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { UsuarioservService } from '../../serivices/usuarioserv/usuarioserv.service';
+import { UsuarioservService } from '../../serivices/usuarioserv.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { UsuarioDB } from '../../interfaces/UsuarioDB.inetrface';
 import { UsuarioModel } from '../../models/usuario.model';
