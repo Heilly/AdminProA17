@@ -7,8 +7,8 @@ export class ImagenpipePipe implements PipeTransform {
 
   private base_url = environment.baseUrl;
 
-  public transform(img : string, tipo: Tipo): string {
-
+  public transform(img : string | undefined, tipo: Tipo): string {
+    
     if(!img){
       return `${ this.base_url }/upload/${tipo}/no-image`;
     } else {

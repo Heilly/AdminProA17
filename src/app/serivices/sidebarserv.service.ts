@@ -4,7 +4,18 @@ import { Injectable, signal } from '@angular/core';
 export class SidebarservService {
   // constructor() {}
 
-  menu = signal( [
+  public menu = [];
+
+  cargarMenu() {
+   const menu = localStorage.getItem('menu');
+   if(menu){
+      return this.menu = JSON.parse( menu ) || [];
+    }
+  
+    return [];
+  }
+
+  menu1 = signal( [ 
     {
       titulo: 'Dashboard',
       icono: 'mdi mdi-gauge',

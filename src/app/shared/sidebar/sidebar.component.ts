@@ -14,12 +14,16 @@ import { SidebarservService } from '../../serivices/sidebarserv.service';
 export class SidebarComponent {
 
   private usuarioServ = inject( UsuarioservService );
-  private sidebarServ = inject( SidebarservService )
+  public sidebarServ = inject( SidebarservService )
   private router = inject( Router );
 
+  public subMenuDashboard  = [];
+
   public usuario : UsuarioModel;
-  subMenuDashboard = computed( () => this.sidebarServ.menu() );
   constructor(){
+
+    this.subMenuDashboard = this.sidebarServ.cargarMenu();
+    console.log( 'subMenuDashboard',this.subMenuDashboard);
 
     this.usuario = this.usuarioServ.usuario;
   }

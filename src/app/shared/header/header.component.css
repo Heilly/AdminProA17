@@ -1,0 +1,9 @@
+#search-global {
+    width: 50vw/* Importante para el posicionamiento absoluto del elemento interno */
+}
+
+.search-input {
+    margin-top: 10px;
+    border: 0px;
+   
+}

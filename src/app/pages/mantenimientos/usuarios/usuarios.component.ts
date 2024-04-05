@@ -7,6 +7,7 @@ import { Tipo } from '../../../interfaces/tipo.type';
 import Swal from 'sweetalert2';
 import { FormArray, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalimagenservService } from '../../../serivices/modalimagenserv.service';
+import { BusquedasService } from '../../../serivices/busquedas.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -18,6 +19,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 
   private usuarioServ = inject( UsuarioservService );
   public modalImgServ = inject( ModalimagenservService );
+  public busquedaServ = inject( BusquedasService );
 
   public usuariologged = this.usuarioServ.usuario;
 
@@ -82,7 +84,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
       return
     }
 
-    this.usuarioServ.buscarUsuario(tipo, value)
+    this.busquedaServ.buscarTipo(tipo, value)
         .subscribe( usuarios => {
           //console.log( 'ts',usuarios);
           this.usuariosList = usuarios

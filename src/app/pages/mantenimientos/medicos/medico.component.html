@@ -1,6 +1,6 @@
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="card">
             <div class="card-body">
                 
@@ -10,30 +10,26 @@
                 <form class="form-horizontal p-t-20"
                         [formGroup]="medicoForm"
                         (submit)="guardarMedico()">
-
-                    <div class="form-group row"
-                            *ngIf="medicoSeleccionado">
-                        <label for="exampleInputuname3" class="col-sm-3 control-label">Foto</label>
-                        <div class="col-sm-9">
-                            <div class="input-group">
-                                <img  
-                                     class="w200"/>
-                            </div>
-                        </div>
-                    </div>
                     
                     <div class="form-group row">
-                        <label for="exampleInputuname3" class="col-sm-3 control-label">Nombre</label>
-                        <div class="col-sm-9">
+                        <label for="exampleInputuname3" class="col-sm-3 control-label">Foto</label>
+                        <div class="col-sm-9 my-3">
                             <div class="input-group">
-                                <div class="input-group-addon"><i class="ti-user"></i></div>
-                                <input type="text" 
-                                        formControlName="nombre"
-                                        class="form-control" 
-                                        id="exampleInputuname3" 
-                                        placeholder="Nombre del médico">
+                                <img [src]="currentMedico?.img| appImagenpipe: 'medicos'" 
+                                     class="w140"/>
                             </div>
                         </div>
+                            <label for="exampleInputuname3" class="col-sm-3 control-label">Nombre</label>
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="ti-user"></i></div>
+                                    <input type="text" 
+                                            formControlName="nombre"
+                                            class="form-control" 
+                                            id="exampleInputuname3" 
+                                            placeholder="Nombre del médico">
+                                </div>
+                            </div>
                     </div>
 
                     <div class="form-group row">
@@ -48,7 +44,6 @@
                                                 {{hospital.nombre}}
                                             </option>
                                     }
-
                                 </select>
                             </div>
                         </div>
@@ -79,17 +74,18 @@
         </div>
     </div>
 
-    <div class="col animated fadeIn fast"  
-        *ngIf="hospitalSeleccionado">
+    <div class="col animated fadeIn fast">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body ">
                 
                 <h4 class="card-title">Hospital</h4>
-                <h6 class="card-subtitle">hospitalSeleccionado.nombre </h6>
-
-                <img 
-                    class="img-thumbnail"/>
-
+                <h6 class="card-subtitle">{{hospitalSeleccionado?.nombre}} </h6>
+                <div class="text-center">
+                    
+                    <img [src]="hospitalSeleccionado?.img | appImagenpipe: 'hospitales'"
+                        class="img-thumbnail " width="250px"/>
+                    
+                </div>
             </div>
         </div>
 
@@ -97,6 +93,3 @@
 </div>
 
 
-<pre>
-    {{ medicoForm.get('hospital')!.value | json }}
-</pre>

@@ -6,4 +6,5 @@ export interface UserLoginGoogle {
     name:    string;
     picture: string;
     token:   string;
+    menu: string;
 }

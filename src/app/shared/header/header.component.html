@@ -31,9 +31,25 @@
             <!-- ============================================================== -->
             <ul class="navbar-nav mr-auto">
                 <!-- This is  -->
-                <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark"><i class="ti-menu"></i></a> </li>
+                <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark"><i class="ti-menu"></i></a> </li>
                 <li class="nav-item hidden-sm-down"></li>
+                <div class="collapse" id="search-global">
+                    <form 
+                        (ngSubmit)="buscar(txtTermino.value)"
+                        class="app-search nav-link">
+                        <div class="d-flex flex-row align-items-baseline">
+                           <input 
+                            #txtTermino
+                            type="text" 
+                            class="form-control search-input" 
+                            placeholder="Search & enter"> 
+                    <a class="srh-btn" (click)="clearInput()"><i class="ti-close"></i></a>
+                        </div>
+
+                    </form>
+                    
+                  </div>
             </ul>
             <!-- ============================================================== -->
             <!-- User profile and search -->
@@ -42,10 +58,27 @@
                 <!-- ============================================================== -->
                 <!-- Search -->
                 <!-- ============================================================== -->
-                <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                    <form class="app-search">
-                        <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
+
+                <li class="nav-item hidden-xs-down search-box">
+                    <a class="nav-link dropdown-toggle hidden-sm-down waves-effect waves-dark" 
+                    data-toggle="collapse" href="#search-global" role="button" aria-expanded="false" 
+                    aria-controls="search-global">
+                        <i class="ti-search"></i>
+                    </a>
+
                 </li>
+
+                <!--<li class="nav-item hidden-xs-down search-box"> 
+                    <a class="nav-link hidden-sm-down waves-effect waves-dark" 
+                    data-toggle="dropdown" aria-expanded="false" data-toggle="collapse" aria-controls="search-global"
+                    href="#search-global">
+                        <i class="ti-search"></i>
+                    </a>
+                    <form class="app-search collapse" id="search-global">
+                        <input type="text" class="form-control" placeholder="Search & enter"> 
+                        <a class="srh-btn"><i class="ti-close"></i></a> 
+                    </form>
+                </li>-->
                 <!-- ============================================================== -->
                 <!-- Comment -->
                 <!-- ============================================================== -->

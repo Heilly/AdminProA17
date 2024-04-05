@@ -7,4 +7,5 @@ export interface UserCreated {
     usuario: UsuarioDB;
     token:   string;
     msg?:     string;
+    menu:string
 }

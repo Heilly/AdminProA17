@@ -35,10 +35,19 @@ export class UsuarioservService {
       }
     }
   }
+  get role() : 'ADMIN_ROLE' | 'USER_ROLE' {
+    return this.usuario.role;
+  }
+
+  guardarLocalStorage( token: string, menu: any){
+    
+    localStorage.setItem('tokenUser', token);
+    localStorage.setItem('menu', JSON.stringify( menu ));
+  }
 
   
   constructor(){
-    this.usuario = new UsuarioModel('', '');
+    this.usuario = new UsuarioModel('', '', 'USER_ROLE');
   }
 
   
@@ -55,7 +64,8 @@ export class UsuarioservService {
       tap( (resp) =>{
         const {name, email, role, google, uid, img=''} = resp.usuarioDB;
         this.usuario = new UsuarioModel(name, email, role, google, uid, img);
-        localStorage.setItem('tokenUser', resp.token);
+        this.guardarLocalStorage(resp.token, resp.menu );
+
       return true  }),
       map( () => true),
       catchError( () => of(false))
@@ -75,7 +85,9 @@ export class UsuarioservService {
     //o puedo enviar los datos creando una variable body, esto es util para cuando tenemos campos con nombres diferentes 
     return this.http.post<UserCreated>( `${ this.baseUrl }/usuarios`, body )
                 .pipe(
-                  tap( (resp) => localStorage.setItem('tokenUser', resp.token) )
+                  tap( (resp) =>{
+                    this.guardarLocalStorage(resp.token, resp.menu );
+                    } )
                 );
   }
   actualizarPerfil( data : UsuarioModel){
@@ -97,7 +109,11 @@ export class UsuarioservService {
     
     return this.http.post<UserCreated>( `${ this.baseUrl }/login`, body )
               .pipe(
-                tap( (resp) => localStorage.setItem('tokenUser', resp.token) )
+                tap( (resp) =>{
+                  this.guardarLocalStorage(resp.token, resp.menu );
+
+
+                  } )
               );
   }
 
@@ -107,7 +123,8 @@ export class UsuarioservService {
                   tap( (resp) => {
                     console.log('loginGoogle',resp);
                     this.usuario = new UsuarioModel( resp.name, resp.email, 'USER_ROLE', true, '', resp.picture )
-                    localStorage.setItem('tokenUser', resp.token);
+                    this.guardarLocalStorage(resp.token, resp.menu );
+
                     localStorage.setItem('email', resp.email);
                   } )
                 )
@@ -117,6 +134,7 @@ export class UsuarioservService {
 
     const userEmail = localStorage.getItem('email');
       localStorage.removeItem('tokenUser');
+      localStorage.removeItem('menu');
       localStorage.removeItem('email');
 
 
@@ -144,21 +162,6 @@ export class UsuarioservService {
       )
   }
 
-  buscarUsuario( tipo: Tipo, field: string ) : Observable<UsuarioModel[]> {
-    return this.http.get( `${this.baseUrl}/todo/coleccion/${ tipo }/${ field }`, this.headers )
-    .pipe(
-      //delay(1000),
-      map( (resp: any) => {
-        const user = resp.resultados;
-        const usuarios = user.map( 
-          //creo nuevos usuario con la estuctura de UsuarioModel
-          (user: UsuarioModel) => new UsuarioModel( user.name, user.email, user.role, user.google, user.uid, user.img, user.password )
-         )
-         console.log(usuarios);
-         return usuarios;
-      })
-    )
-  }
   eliminarUsuario( usuario: UsuarioModel){
     const idUsuario = usuario.uid
     return this.http.delete(`${this.baseUrl}/usuarios/${idUsuario}`, this.headers)

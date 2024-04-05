@@ -9,6 +9,8 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
 import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { MedicoComponent } from './mantenimientos/medicos/medico.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
+import { adminGuard, adminGuardMatch } from '../guards/admin.guard';
 
 // import { PagesComponent } from './pages.component';
 
@@ -23,11 +25,19 @@ export const PAGES_ROUTES: Routes = [
           { path: 'rxjs', component: RxjsComponent, title: 'RxJs' },
           { path: 'perfil', component: PerfilComponent, title: 'Perfil de Usuario' },
 
+          //Busqueda
+          { path: 'buscar/:termino', component: BusquedaComponent, title: 'Busquedas' },
+
           //Mantenimientos
-          { path: 'usuarios', component: UsuariosComponent, title: 'Usarios de Aplicacion' },
           { path: 'hospitales', component: HospitalesComponent, title: 'Hospitales de Aplicacion' },
           { path: 'medicos', component: MedicosComponent, title: 'Medicos de Aplicacion' },
           { path: 'medico/:id', component: MedicoComponent, title: 'Editar Medico' },
+
+          //Rutas Administrativas
+          { path: 'usuarios',  
+          canMatch: [adminGuardMatch],
+          canActivate: [adminGuard],
+          component: UsuariosComponent, title: 'Usarios de Aplicacion' },
 
         ]
   }

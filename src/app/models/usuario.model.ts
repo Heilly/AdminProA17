@@ -7,7 +7,7 @@ export class UsuarioModel{
     constructor(
         public name:   string,
         public email:  string,
-        public role?:   string,
+        public role:   'ADMIN_ROLE' | 'USER_ROLE',
         public google?: boolean,
         public uid?:    string,
         public img?: string,
