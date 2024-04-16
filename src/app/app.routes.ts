@@ -7,7 +7,8 @@ export const routes: Routes = [
     { 
         path:'dashboard',
         canActivate: [authCanActivatedGuard],
-        loadChildren: () => import('./pages/pages.routes').then( r => r.PAGES_ROUTES )
+        loadChildren: () => import('./pages/pages.routes').then( r => r.PAGES_ROUTES ),
+        title: 'Dashboard'
     },
     ...AUTH_ROUTES,
     

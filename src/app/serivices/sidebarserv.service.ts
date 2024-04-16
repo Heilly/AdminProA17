@@ -40,6 +40,7 @@ export class SidebarservService {
       icono: 'mdi mdi-folder-lock-open',
       submenu: [
         { titulo: 'Gifs App', url: 'gifs' },
+        { titulo: 'Country SPA', url: 'country/by-capital' },
       ]
     },
   ])

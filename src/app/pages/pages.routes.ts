@@ -12,6 +12,7 @@ import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { adminGuard, adminGuardMatch } from '../guards/admin.guard';
 import { HomeComponent } from './project/gifsApp/pages/home/home.component';
+import { LayoutComponent } from './project/CountrySPA/pages/layout/layout.component';
 
 // import { PagesComponent } from './pages.component';
 
@@ -43,6 +44,11 @@ export const PAGES_ROUTES: Routes = [
           //Proyectos
           
           { path: 'gifs', component: HomeComponent, title: 'Gifs App'},
+          { 
+            path: 'countries', 
+            component: LayoutComponent, 
+            loadChildren: () => import('./project/CountrySPA/countries.routes').then( r => r.COUNTRIES_ROUTES )
+          },
 
         ]
   }

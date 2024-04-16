@@ -31,3 +31,16 @@
   * inshift()
   * splice( , )
   * Lazy Image
+
+# Country SPA
+  * Rutas
+  * RouterLink y RouterLinkActive
+  * ActivatedRoute with params
+  * Componentes especializados
+  * DebounceTime(searchBox)
+  * Inputs
+  * SwitchMaps
+  * Consumo de APIs
+  * Tipado de datos
+  * Menú de aplicación
+
