@@ -1,0 +1,12 @@
+
+
+@for (gif of gifs; track $index) {
+    <div class="col-md-6 col-lg-4  m-2"  style="max-width: 250px; ">
+        <div class="d-flex flex-column align-items-center p-2" style="background-color: darkslategray;">
+            <shared-lazy-image class=" img-responsive"
+                [alt]="gif.title" 
+                [url]="gif.images.downsized_medium.url"/>
+            <h6 class="m-2 text-center text-white">{{ gif.title }}</h6>
+        </div>
+    </div>
+}

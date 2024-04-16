@@ -15,3 +15,19 @@
 
 ## 2 ``ngModel``
  proporciona enlace bidireccional de datos. Esto significa que los cambios en el modelo actualizan la vista y los cambios en la vista actualizan el modelo. Es útil cuando trabajas con formularios simples o cuando necesitas una solución rápida para enlazar los datos de entrada con propiedades en tu componente.
+
+
+
+## Proyectos
+# Gifs Card
+ ``https://developers.giphy.com/``
+  * ViewChild
+  * Historial de búsquedas
+  * Uso de Api Keys
+  * LocalStorage
+  * Peticiones HTTP
+  * Signals
+  * toLowerCase()
+  * inshift()
+  * splice( , )
+  * Lazy Image

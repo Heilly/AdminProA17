@@ -11,6 +11,7 @@ import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { adminGuard, adminGuardMatch } from '../guards/admin.guard';
+import { HomeComponent } from './project/gifsApp/pages/home/home.component';
 
 // import { PagesComponent } from './pages.component';
 
@@ -38,6 +39,10 @@ export const PAGES_ROUTES: Routes = [
           canMatch: [adminGuardMatch],
           canActivate: [adminGuard],
           component: UsuariosComponent, title: 'Usarios de Aplicacion' },
+
+          //Proyectos
+          
+          { path: 'gifs', component: HomeComponent, title: 'Gifs App'},
 
         ]
   }

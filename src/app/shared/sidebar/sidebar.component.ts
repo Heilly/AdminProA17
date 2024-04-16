@@ -23,7 +23,7 @@ export class SidebarComponent {
   constructor(){
 
     this.subMenuDashboard = this.sidebarServ.cargarMenu();
-    console.log( 'subMenuDashboard',this.subMenuDashboard);
+    //console.log( 'subMenuDashboard',this.subMenuDashboard);
 
     this.usuario = this.usuarioServ.usuario;
   }

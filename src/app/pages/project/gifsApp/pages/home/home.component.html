@@ -1,0 +1,19 @@
+<div class="row flex-nowrap">
+  <div class="col-2 border-3"  style="min-width: 160px;">
+    <gifs-sidebar/>
+  </div>
+  <div class="col-10">
+    <div class="row">
+
+      <div class="col-12">
+        <div class="card">
+            <gifs-search-box/>
+        </div>
+      </div>
+      
+      <div class="col-12">
+          <gifs-card-list [gifs]="gifs()" class="d-flex   justify-content-center" style="flex-wrap: wrap"/>
+      </div>
+  </div>
+</div>
+</div>

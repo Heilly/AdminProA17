@@ -35,5 +35,12 @@ export class SidebarservService {
         { titulo: 'Médicos', url: 'medicos' },
       ]
     },
+    {
+      titulo: 'Proyectos',
+      icono: 'mdi mdi-folder-lock-open',
+      submenu: [
+        { titulo: 'Gifs App', url: 'gifs' },
+      ]
+    },
   ])
 }
