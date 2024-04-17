@@ -1,0 +1,40 @@
+
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+            
+            <div>
+              <h3>Pipes numéricos</h3><hr>
+            </div>
+            
+            
+            <div class="grid">
+            
+              <div class="col-12 col-md-4">
+                <div>
+                  <h4>Ventas Netas del presente año</h4>
+                  {{ (totalSells + 1235 ) | number:'1.2-2' }}
+                </div>
+              </div>
+            
+              <div class="col-12 col-md-4">
+                <div>
+                  <h4>Ventas Brutas del presente año</h4>
+                  {{ totalSells | currency:'EUR':'symbol-narrow':'1.4-4' }}
+                </div>
+              </div>
+            
+              <div class="col-12 col-md-4">
+                <div>
+                  <h4>Ganancia porcentual del presente año</h4>
+                  {{ percent | percent: '1.2-2' }}
+                </div>
+              </div>
+            
+            </div>
+
+          </div>
+      </div>
+  </div>
+</div>

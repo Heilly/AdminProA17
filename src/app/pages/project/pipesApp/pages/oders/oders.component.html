@@ -1,0 +1,73 @@
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+            <h2>Pipes personalizados</h2><hr>
+            <p>
+              Pipes personalizados - creados por {{ 'nosotros' | toggleCase:isUpperCase }}
+            </p>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div>
+  
+</div>
+
+<div>
+  <div class="p-toolbar-group-start">
+    <button class="btn"
+        label="ToogleCase"
+        icon="pi pi-search"
+        (click)="toggleUpperCase()"
+      ></button>
+  </div>
+
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+            <div class="row justify-content-between">
+              <div >
+                <button class="btn"
+                icon="pi pi-search"
+                (click)="toggleUpperCase()">ToogleCase</button>
+              </div>
+              <div>
+                <div>      
+                  <button class="mr-2 btn btn-primary"
+                  (click)="changeOrder('name')"><i class="bi bi-funnel"></i>Por nombre</button>
+            
+                  <button class="mr-2 btn btn-info"
+                            (click)="changeOrder('canFly')"><i class="bi bi-funnel"></i>Por volar</button>
+            
+                  <button class="mr-2 btn btn-warm"
+                            (click)="changeOrder('color')"><i class="bi bi-funnel"></i>Por color</button>
+                </div>
+              </div>
+
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Vuela</th>
+                  <th scope="col">Color</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (hero of heroes | sortBy: orderBy; track $index) {
+                  <tr>
+                    <td>{{ hero.name }}</td>
+                    <td>{{ hero.canFly | canFly | titlecase }}</td>
+                    <td>{{ hero.color }}</td>
+                  </tr>
+                }
+                
+              </tbody>
+            </table>
+          </div>
+      </div>
+  </div>
+</div>

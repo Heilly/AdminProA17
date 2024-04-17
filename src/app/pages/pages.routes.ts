@@ -13,6 +13,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 import { adminGuard, adminGuardMatch } from '../guards/admin.guard';
 import { HomeComponent } from './project/gifsApp/pages/home/home.component';
 import { LayoutComponent } from './project/CountrySPA/pages/layout/layout.component';
+import { LayoutpipeComponent } from './project/pipesApp/pages/layoutpipe/layoutpipe.component';
 
 // import { PagesComponent } from './pages.component';
 
@@ -47,8 +48,15 @@ export const PAGES_ROUTES: Routes = [
           { 
             path: 'countries', 
             component: LayoutComponent, 
-            loadChildren: () => import('./project/CountrySPA/countries.routes').then( r => r.COUNTRIES_ROUTES )
+            loadChildren: () => import('./project/CountrySPA/countries.routes').then( r => r.COUNTRIES_ROUTES ),
+            title: 'Country SPA'
           },
+          {
+            path: 'pipe',
+            component: LayoutpipeComponent,
+            loadChildren: () => import('./project/pipesApp/pipesapp.routes').then( r => r.PIPESAPP_ROUTES),
+            title: 'Pipes App'
+          }
 
         ]
   }

@@ -1,0 +1,71 @@
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+            <h3>Pipes incluídos en Angular - Usualmente en el Common Module</h3>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row animated fadeIn fast">
+  <div class="col-xl-4 col-md-4">
+      <div class="card">
+          <div class="card-body">
+            <div class="col-12 md:col-4">
+              <div header="uppercase">
+                <span>uppercase: </span>{{ nameLower | uppercase }}
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-xl-4 col-md-4">
+    <div class="card">
+        <div class="card-body">
+          <div class="col-12 md:col-4">
+            <div header="uppercase">
+              <span>lowercase: </span>{{ nameUpper | lowercase }}
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="col-xl-4 col-md-4">
+  <div class="card">
+      <div class="card-body">
+        <div class="col-12 md:col-4">
+          <div header="uppercase">
+            <span>titlecase: </span>{{ fullName | titlecase }}
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+</div>
+<!--Fechas-->
+<div class="row animated fadeIn fast">
+  <div class="col-xl-12">
+      <div class="card">
+          <div class="card-body">
+            <h3>titlecase</h3>
+            <ol>
+              <li> <strong class="fw-bold">fecha: </strong> {{ customDate }}  </li>
+              <li> <strong class="fw-bold">fecha | date:  </strong>{{ customDate | date }} </li>
+              <li> <strong class="fw-bold">fecha | date:'short':  </strong>{{ customDate | date:'short' }}</li>
+              <li> <strong class="fw-bold">fecha | date:'long':  </strong> {{ customDate | date:'long' }} </li>
+              <li> <strong class="fw-bold">fecha | date:'MMMM':  </strong>{{ customDate | date:'MMMM' }} </li>
+              <li> <strong class="fw-bold">fecha | date:'MMMM dd, yyyy':  </strong>{{ customDate | date:'MMMM dd, yyyy' }}</li>
+            </ol>
+      
+            <hr>
+            <ol>
+              <li> <strong class="fw-bold">fecha | date:'long':'GMT-6': </strong>{{ customDate | date:'long':'GMT-6' }} </li>
+              <li> <strong class="fw-bold">fecha | date:'long':'GMT-4': </strong>{{ customDate | date:'long':'GMT-4' }} </li>
+              <li> <strong class="fw-bold">fecha | date:'long':'':'es-HN': </strong>{{ customDate | date:'long':'':'es-HN' }} </li>
+              <li> <strong class="fw-bold">fecha | date:'long':'':'en-US': </strong>{{ customDate | date:'long':'':'en-US' }} </li>
+              <li> <strong class="fw-bold">fecha | date:'long':'':'fr-CA': </strong>{{ customDate | date:'long':'':'fr-CA' }} </li>
+            </ol>
+          </div>
+      </div>
+  </div>
+</div>
