@@ -27,7 +27,7 @@ export class SidebarservService {
       ]
     },
     {
-      titulo: 'Mantenimientos',
+      titulo: 'Hospitales',
       icono: 'mdi mdi-folder-lock-open',
       submenu: [
         { titulo: 'Usuarios', url: 'usuarios' },
@@ -37,7 +37,7 @@ export class SidebarservService {
     },
     {
       titulo: 'Proyectos',
-      icono: 'mdi mdi-folder-lock-open',
+      icono: 'mdi mdi-widgets',
       submenu: [
         { titulo: 'Gifs App', url: 'gifs' },
         { titulo: 'Country SPA', url: 'country/by-capital' },

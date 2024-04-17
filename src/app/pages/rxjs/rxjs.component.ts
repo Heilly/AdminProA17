@@ -12,7 +12,7 @@ export class RxjsComponent implements OnDestroy {
 /* Retry(1)  cuantas veces quiero que lo intente a pesar del error
    Take(4) cuantas emisiones del Observable necesita para completar el observable
    map() modificar el valor que recibe el observable y devuelve un nuevo valor
-   filter() deviulve un boolean, filtra la data si cumple con la condicion
+   filter() devulve un boolean, filtra la data si cumple con la condicion
    unsubscribe() necesito implementar el OnDestroy
 */
 
@@ -32,7 +32,7 @@ export class RxjsComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.intervalSub.unsubscribe( )
   }
-
+//Se emite cada 1 segundo, solo los numeros pares
   returnInterval() : Observable<number>{
     return interval( 100 )
             .pipe(
