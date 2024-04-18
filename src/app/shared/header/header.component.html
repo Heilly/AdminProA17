@@ -16,7 +16,7 @@
                     <img src="./assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
                 </b>
                 <!--End Logo icon -->
-                <!-- Logo text --><span>
+                <!-- Logo text --><span style="display: none;">
                     <!-- dark Logo text -->
                     <img src="./assets/images/logo-text.png" alt="homepage" class="dark-logo" />
                     <!-- Light Logo text -->    
@@ -30,13 +30,13 @@
             <!-- toggle and nav items -->
             <!-- ============================================================== -->
             <ul class="navbar-nav mr-auto">
-
-                <!-- This is  
-                <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark"><i class="ti-menu"></i></a> </li>
-                <li class="nav-item"> <a href="#sidebardashboard" class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark"><i class="ti-menu"></i></a> </li>
--->
-
+                <!-- This is  -->
+                <li class="nav-item"> <a id="sidebartoggler" (click)="toggleSidebar()" class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" ><i id="sidebartoggleri" class="ti-menu"></i></a> </li>
+                <li class="nav-item"> <a id="sidebartoggler" (click)="toggleSidebar()" class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" ><i id="sidebartoggleri" class="ti-menu"></i></a> </li>
                 <li class="nav-item hidden-sm-down"></li>
+
+
+                <!--<li class="nav-item hidden-sm-down"></li>
                 <div class="collapse" id="search-global">
                     <form 
                         (ngSubmit)="buscar(txtTermino.value)"
@@ -52,7 +52,7 @@
 
                     </form>
                     
-                  </div>
+                  </div>-->
             </ul>
             <!-- ============================================================== -->
             <!-- User profile and search -->

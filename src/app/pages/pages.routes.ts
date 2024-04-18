@@ -22,7 +22,7 @@ export const PAGES_ROUTES: Routes = [
     path: '', 
         component: PagesComponent,
         children: [
-          { path: '', component: DashboardComponent },
+          { path: '', component: DashboardComponent, title: 'Dashboard' },
           { path: 'progress', component: ProgressComponent, title: 'Progress' },
           { path: 'promise', component: PromiseComponent, title: 'Promise' },
           { path: 'rxjs', component: RxjsComponent, title: 'RxJs' },

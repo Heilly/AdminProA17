@@ -271,9 +271,13 @@ When click on sidebar toggler and also for tablet
         .left-sidebar {
             position: fixed;
         }
-        .left-sidebar,
+        /*.left-sidebar,
         .sidebar-footer {
             left: -240px;
+        }*/
+        .left-sidebar,
+        .sidebar-footer {
+            left: 0px;
         }
         &.show-sidebar {
             .left-sidebar,

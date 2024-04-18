@@ -23,7 +23,8 @@
 
 
 </head>
-<body class="fix-header card-no-border fix-sidebar">
+<body 
+    class="fix-header card-no-border fix-sidebar">
 
   <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
@@ -36,11 +37,23 @@
   </div>
   <app-root></app-root>
 
+  <script>
+    // Seleccionar el botón por su ID
+    var boton = document.getElementById("sidebartoggler");
+
+    // Agregar un event listener para detectar el clic
+    boton.addEventListener("click", function() {
+      // Mostrar un mensaje en la consola
+      console.log("¡Se hizo clic en el botón!");
+    });
+  </script>
+
 
   <!-- All Jquery -->
     <!-- ============================================================== -->
 
-    
+        <!--Custom JavaScript
+        <script src="./assets/js/custom.js"></script> -->
 
     <script src="./assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
@@ -56,6 +69,10 @@
     <script src="./assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="./assets/plugins/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
-    <script src="./assets/js/custom.min.js"></script>
+    <script src="./assets/js/custom.js"></script>
+  
+  <!-- Chartjs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
 </body>
 </html>

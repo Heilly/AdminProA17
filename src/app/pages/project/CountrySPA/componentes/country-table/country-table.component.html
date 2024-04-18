@@ -3,21 +3,21 @@
   No hay países que mostrar
 </div>
 
-<ng-template #table>
-  <table class="table table-hover">
+<ng-template #table class="table-responsive-sm">
+  <table class="table table-striped table-responsive">
     <thead>
       <tr>
-        <th>#</th>
-        <th>Bandera</th>
-        <th>Nombre</th>
-        <th>Capital</th>
-        <th>Población</th>
-        <th></th>
+        <th scope="col">#</th>
+        <th scope="col">Bandera</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Capital</th>
+        <th scope="col">Población</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let country of countries; let i = index">
-        <td>{{ i + 1 }}</td>
+      <tr *ngFor="let country of countries; let i = index" >
+        <td scope="row">{{ i + 1 }}</td>
         <td>
           <img [src]="country.flags.svg" [alt]="country.name.common">
         </td>

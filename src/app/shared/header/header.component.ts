@@ -12,6 +12,21 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+
+
+  isMiniSidebarActive: boolean = true;
+
+  toggleSidebar(): void {
+    this.isMiniSidebarActive = !this.isMiniSidebarActive;
+    if (this.isMiniSidebarActive) {
+      document.body.classList.add('mini-sidebar');
+    } else {
+      document.body.classList.remove('mini-sidebar');
+    }
+  }
+
+
+
   
   private usuarioServ = inject( UsuarioservService );
   private router = inject( Router );
