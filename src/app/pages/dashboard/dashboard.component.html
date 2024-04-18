@@ -1,1 +1,15 @@
-<p>dashboard works!</p>
+
+<div class="row">
+@for (item of sidebarServ.cargarMenu(); track $index) {
+<div class="col-md-6 col-sm-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">{{item.titulo}}</h4>
+            
+            @for (submenu of item.submenu; track $index) {
+                <a [routerLink]="submenu.url" class="card-link">  {{ submenu.titulo }}  </a>
+            }
+        </div>
+    </div>
+</div>
+}</div>

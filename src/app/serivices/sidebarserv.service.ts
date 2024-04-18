@@ -21,9 +21,9 @@ export class SidebarservService {
       icono: 'mdi mdi-gauge',
       submenu: [
         { titulo: 'Main', url: '/' },
-        { titulo: 'rxjs', url: 'rxjs' },
-        { titulo: 'Promesas', url: 'promise' },
-        { titulo: 'ProgressBar', url: 'progress' },
+        { titulo: 'rxjs', url: '/dashboard/rxjs' },
+        { titulo: 'Promesas', url: '/dashboard/promise' },
+        { titulo: 'ProgressBar', url: '/dashboard/progress' },
       ]
     },
     {

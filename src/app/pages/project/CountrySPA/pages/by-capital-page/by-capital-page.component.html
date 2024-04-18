@@ -4,7 +4,7 @@
 
 
 <div class="row">
-  <div class="col">
+  <div class="col-12">
       <!-- SearchBox -->
       <!-- (onValue)="searchByCapital($event)" -->
       <country-searchbox
@@ -14,11 +14,10 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col">
+  <div class="col-12">
     <hr>
     <country-loading-spinner *ngIf="isLoading"></country-loading-spinner>
 
     <country-table [countries]="countries"></country-table>
-  </div>
+
 </div>
