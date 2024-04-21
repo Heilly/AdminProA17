@@ -1,14 +1,27 @@
+    <app-header/>
+    
+    
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <section id="wrapper" class="login-register login-sidebar" style="background-image:url(../assets/images/background/login-register.jpg);">
+    <section id="wrapper" class="login-register login-sidebar " style="background-image:url(../assets/images/background/login-register.jpg);">
         <div class="login-box card">
-            <div class="card-body">
+            <div class="card-body mt-5">
                 <form
                     [formGroup]="formLogin"
+                    
                     (ngSubmit)="onSubmit()" 
-                    class="form-horizontal form-material" id="loginform" action="index.html">
-                    <a href="javascript:void(0)" class="text-center db"><img src="../assets/images/logo-icon.png" alt="Home" /><br/><img src="../assets/images/logo-text.png" alt="Home" /></a>
+                    class="form-horizontal form-material m-t-40" id="loginform" action="index.html">
+                    
+                    <select 
+                            [formControl] = "formSelectUser"
+                            (change)="onChangeSelectUser()"
+                            class="custom-select" aria-label="Default select example m-t-40">
+                        <option selected value="null">Select User Login</option>
+                        <option value="user">Usuario</option>
+                        <option value="admin">Administrador</option>
+                      </select>
+
                     <div class="form-group m-t-40">
                         <div class="col-xs-12">
                             <input 
@@ -44,13 +57,13 @@
                             <button class="btn btn-info btn-lg btn-block text-uppercase btn-rounded" type="submit">Login</button>
                         </div>
                     </div>
-                    <div class="row">
+                    <!--<div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
                             <div class="social justify-content-center">
                                 <div #googleBtn></div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="form-group m-b-0">
                         <div class="col-sm-12 text-center">
                             ¿No tienes cuenta? <a routerLink="/register" href="pages-register2.html" class="text-primary m-l-5"><b>Registrate</b></a>
@@ -58,11 +71,6 @@
                     </div>
                 </form>
                 
-            </div>
-            <div class="px-2">
-                <h4>Acceder</h4>
-                <p><strong>Admin: </strong> test1&#64;gmail.com</p>
-                <p><strong>Usuario: </strong> ana.martinez&#64;example.com</p>
             </div>
         </div>
     </section>

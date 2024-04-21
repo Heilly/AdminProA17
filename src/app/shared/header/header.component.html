@@ -7,9 +7,9 @@
         <!-- Logo -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" routerLink="/aboutme">
                 <!-- Logo icon -->
-                <b>
+                <b> 
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
                     <img src="./assets/logo-icon.png" alt="homepage" class="dark-logo" />
@@ -21,14 +21,14 @@
         <!-- ============================================================== -->
         <!-- End Logo -->
         <!-- ============================================================== -->
-        <div class="navbar-collapse">
+        <div class="navbar-collapse"  >
             <!-- ============================================================== -->
             <!-- toggle and nav items -->
             <!-- ============================================================== -->
             <ul class="navbar-nav mr-auto">
                 <!-- This is  -->
-                <li class="nav-item"> <a id="sidebartoggler" (click)="toggleSidebar()" class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" ><i id="sidebartoggleri" class="ti-menu"></i></a> </li>
-                <li class="nav-item"> <a id="sidebartoggler" (click)="toggleSidebar()" class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" ><i id="sidebartoggleri" class="ti-menu"></i></a> </li>
+                <li class="nav-item hidden-element"  > <a id="sidebartoggler" (click)="toggleSidebar()" class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" ><i id="sidebartoggleri" class="ti-menu"></i></a> </li>
+                <li class="nav-item hidden-element" > <a id="sidebartoggler" (click)="toggleSidebar()" class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" ><i id="sidebartoggleri" class="ti-menu"></i></a> </li>
                 <li class="nav-item hidden-sm-down"></li>
 
 
@@ -175,14 +175,14 @@
                 <!-- ============================================================== -->
                 <!-- Language -->
                 <!-- ============================================================== -->
-                <!--<li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="flag-icon flag-icon-us"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right animated fadeIn fast"> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-in"></i> India</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> China</a>                                <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> Dutch</a> </div>
-                </li>-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" routerLink="/login"> Mis Proyectos</a>
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" routerLink="/aboutme"> Sobre mi</a>
+                </li>
                 <!-- ============================================================== -->
                 <!-- Profile -->
                 <!-- ============================================================== -->
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown hidden-element">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img [src]="usuario.imagenUrl" alt="user" class="profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right animated fadeIn fast">
                         <ul class="dropdown-user">

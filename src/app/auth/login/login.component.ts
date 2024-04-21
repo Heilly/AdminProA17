@@ -1,17 +1,19 @@
 import { AfterViewInit, Component, ElementRef, inject, ViewChild, NgZone } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ErrorsService } from '../../serivices/errors.service';
 import { UsuarioservService } from '../../serivices/usuarioserv.service';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { HeaderComponent } from '../../shared/header/header.component';
+import { tap } from 'rxjs';
 
 declare const google: any;
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, RouterLink, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, HeaderComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -26,16 +28,45 @@ export class LoginComponent implements AfterViewInit {
   private ngZone = inject( NgZone );
 
   public formLogin : FormGroup;
+  public formSelectUser : FormControl = new FormControl('null');
 
   @ViewChild('googleBtn') googleBtn!: ElementRef;
 
   constructor(){
       this.formLogin = this.fb.group({
       email: [ localStorage.getItem('email') || '' , [ Validators.required, Validators.email ] ],
-      password: ['123456', Validators.required ],
+      password: ['', Validators.required ],
       remember: [false]
     });
+
+    this.onChangeSelectUser()
+
   }
+
+  onChangeSelectUser(){
+
+    this.formSelectUser.valueChanges
+                        .pipe(
+                          tap( value => {
+                            if( value === 'null' ){
+                              this.formLogin.get('email')?.setValue('')
+                              this.formLogin.get('password')?.setValue('')
+                            } else if( value === 'user' ){
+                              this.formLogin.get('email')?.setValue('user.login@adminpro.com')
+                              this.formLogin.get('password')?.setValue('123456')
+                            } else if( value === 'admin' ){
+                              this.formLogin.get('email')?.setValue('admin.login@adminpro.com')
+                              this.formLogin.get('password')?.setValue('123456')
+                            }
+                          } )
+                        )
+                        .subscribe()
+
+
+  }
+
+
+
 
   /**
    * Cuando el usuario da click en el btnGoogle,
@@ -47,7 +78,7 @@ export class LoginComponent implements AfterViewInit {
    */
   
   ngAfterViewInit(): void {
-    this.googleInit()
+    //this.googleInit()
   }
   googleInit() {
     google.accounts.id.initialize({
